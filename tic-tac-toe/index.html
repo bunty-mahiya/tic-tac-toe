@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tic-tac-toe</title>
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            background-color: #448384;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .container .child-container {
+            width: 55vmax;
+            height: 57vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .container .child-container .btn {
+            width: 30vmin;
+            height: 18vh;
+            border-radius: 10px;
+            border: none;
+            background-color: white;
+            color: red;
+            font-size: 16px;
+        }
+
+        .container #restart,
+        #start-game {
+            width: 80px;
+            border-radius: 2px;
+            height: 28px;
+            border: none;
+            text-transform: capitalize;
+            font-size: 8px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+
+        }
+
+        #winner {
+           
+                width: 40vmax;
+                height: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 25px;
+                font-family: system-ui;
+                color:black;
+        
+        }
+
+        button {
+            cursor: pointer;
+        }
+        @media screen and (min-width:768px) and (max-width:1300px){
+            .container .child-container{
+                width: 70vmax;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="winner">
+            <p>
+
+            </p>
+
+        </div>
+        <button id="start-game">
+            <h1>
+                start
+            </h1>
+
+        </button>
+
+
+        <div class="child-container">
+            <button class="btn">
+
+            </button>
+            <button class="btn">
+
+            </button>
+            <button class="btn">
+
+            </button>
+            <button class="btn">
+
+            </button>
+            <button class="btn">
+
+            </button>
+            <button class="btn">
+
+            </button>
+            <button class="btn">
+
+            </button>
+            <button class="btn">
+
+            </button>
+            <button class="btn">
+
+            </button>
+        </div>
+
+        <button id="restart">
+            <h1>
+                restart
+            </h1>
+
+        </button>
+
+    </div>
+
+    <script>
+       
+
+        let win = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        let restartBtn = document.getElementById("restart");
+        let startBtn = document.getElementById("start-game");
+        let playO = true;
+        let btn = document.querySelectorAll(".btn");
+        let winner=document.getElementById("winner").querySelector("p")
+
+        btn.forEach(box => {
+            box.addEventListener("click", () => {
+                if (playO) {
+                    box.innerText = "O";
+                    playO = false;
+                } else {
+                    box.innerText = "X";
+                    playO = true;
+                }
+                box.disabled = true;
+                checkWinner();
+
+            });
+        });
+        function disableded() {
+            for (const val of btn) {
+                val.disabled = true;
+            }
+
+        }
+        function restartGame() {
+           for (const val of btn) {
+            val.disabled=false;
+            val.innerText=" ";
+           }
+           winner.innerText=" "
+            
+        }
+
+        let checkWinner = () => {
+            for (const val of win) {
+                let first = btn[val[0]].innerHTML;
+                let second = btn[val[1]].innerHTML;
+                let third = btn[val[2]].innerHTML;
+                if (first === "O" && second === "O" && third === "O") {
+                    winner.innerText = "Player O wins!";
+                    disableded();
+
+                    console.log("Player O wins!");
+                } else if (first === "X" && second === "X" && third === "X") {
+                    winner.innerText = "Player X wins!";
+                    disableded();
+
+                    console.log("Player X wins!");
+                }
+
+            }
+        }
+        restartBtn.addEventListener("click",restartGame);
+        startBtn.addEventListener("click",restartGame)
+
+
+
+    </script>
+</body>
+
+</html>
